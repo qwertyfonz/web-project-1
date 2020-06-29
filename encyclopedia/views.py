@@ -11,6 +11,9 @@ def siteexists(entry):
         return False
     return True
 
+def convertToHTML(entry):
+    markdowner.convert(entry)
+
 def index(request):
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
@@ -21,7 +24,7 @@ def index(request):
 # We want to use the markdown function to convert the page into HTML before displaying it to the user using markdowner.convert(content)
 def page(request, entry):
     if siteexists(entry) == False:
-        return HttpResponse("No page found.")
+        return render(request, "encyclopedia/pagenotfound.html")
     else:
         return render(request, "encyclopedia/page.html", {
             "entry": markdowner.convert(util.get_entry(entry))
