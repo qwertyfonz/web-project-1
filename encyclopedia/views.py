@@ -32,8 +32,14 @@ def page(request, entry):
         })
 
 
-def substring(str):
-    searchresult = str.find(request.GET.get("q"))
+def searchmatch(request):
+    searchlist = []
+    for entry in util.list_entries():
+        searchresult = entry.find(request.GET.get("q"))
+        if searchresult >= 0:
+            searchlist.append(entry)
+    return searchlist
+        
 
 def search(request):
     query = request.GET.get("q")
@@ -41,5 +47,5 @@ def search(request):
         return page(request, query)
     else:
         return render(request, "encyclopedia/search.html", {
-
+            "list": searchmatch(request)
         })
