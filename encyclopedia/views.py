@@ -27,7 +27,19 @@ def page(request, entry):
         return render(request, "encyclopedia/pagenotfound.html")
     else:
         return render(request, "encyclopedia/page.html", {
-            "entry": markdowner.convert(util.get_entry(entry))
+            "entry": markdowner.convert(util.get_entry(entry)),
+            "title": entry.capitalize()
         })
 
 
+def substring(str):
+    searchresult = str.find(request.GET.get("q"))
+
+def search(request):
+    query = request.GET.get("q")
+    if util.get_entry(query) != None:
+        return page(request, query)
+    else:
+        return render(request, "encyclopedia/search.html", {
+
+        })
