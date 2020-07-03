@@ -2,6 +2,7 @@ from django import forms
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+import random
 from . import util
 
 from markdown2 import Markdown 
@@ -100,3 +101,8 @@ def newpage(request):
     return render(request, "encyclopedia/newpage.html", {
         "form": NewPageForm()
     })
+
+# Returns random page
+def randompage(request):
+    randomName = random.choice(util.list_entries())
+    return HttpResponseRedirect(f"http://127.0.0.1:8000/wiki/{randomName}")

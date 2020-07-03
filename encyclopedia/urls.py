@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path("", views.index, name="index"),
     path("newpage", views.newpage, name="newpage"),
+    path("randompage", views.randompage, name="randompage"),
     path("search", views.search, name="search"),
     path("<str:entry>", views.page, name="page")
 ]
