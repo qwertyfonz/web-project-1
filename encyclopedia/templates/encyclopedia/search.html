@@ -1,0 +1,27 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Search Results
+{% endblock %}
+
+{% block body %}
+    <h1>Search Results</h1>
+
+    <!-- If no matched search results are found: -->
+    {% if emptylist %}
+
+    <p>No search results found!</p>
+
+    <!-- Else, print the list of matched search results as a list -->
+    {% else %}
+        <ul>
+        {% for entry in list %}
+            <li>
+                <a href="http://127.0.0.1:8000/wiki/{{ entry }}">{{ entry }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    
+
+{% endblock %}

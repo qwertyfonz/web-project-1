@@ -9,6 +9,7 @@ from markdown2 import Markdown
 
 markdowner = Markdown()
 
+# New page class
 class NewPageForm(forms.Form):
     newPageTitle = forms.CharField(label=("Page Title"))
     newPageContent = forms.CharField(widget=forms.Textarea, label="Page Content")
@@ -107,7 +108,7 @@ def randompage(request):
     randomName = random.choice(util.list_entries())
     return HttpResponseRedirect(f"http://127.0.0.1:8000/wiki/{randomName}")
 
-# Allows user to edit and save an entry
+# Allows user to edit and save an entry using predefined save_entry function in util
 def editpage(request, entry):
     form = NewPageForm(initial={'newPageTitle': entry, 'newPageContent': util.get_entry(entry)})
     if request.method == "POST":
