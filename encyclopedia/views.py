@@ -106,3 +106,15 @@ def newpage(request):
 def randompage(request):
     randomName = random.choice(util.list_entries())
     return HttpResponseRedirect(f"http://127.0.0.1:8000/wiki/{randomName}")
+
+# Allows user to edit and save an entry
+def editpage(request, entry):
+    form = NewPageForm(initial={'newPageTitle': entry, 'newPageContent': util.get_entry(entry)})
+    if request.method == "POST":
+        title = request.POST.get("newPageTitle")
+        content = request.POST.get("newPageContent")
+        util.save_entry(title, content)
+        return HttpResponseRedirect(f"http://127.0.0.1:8000/wiki/{title}")
+    return render(request, "encyclopedia/editpage.html", {
+        "form": form
+    })
